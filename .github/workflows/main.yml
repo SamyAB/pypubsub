@@ -1,0 +1,18 @@
+on: [push]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.9
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        pip install .[dev]
+    - name: Check python code convention compliance
+      run:
+        flake8
+    - name: Run unit tests
+      run:
+        pytest tests
